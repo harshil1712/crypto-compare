@@ -1,28 +1,48 @@
 <template>
   <v-app id="inspire" dark>
-    <v-toolbar app fixed clipped-left>
+    <v-navigation-drawer
+      clipped
+      fixed
+      v-model="drawer"
+      app
+    >
+      <v-list dense>
+        <v-list-tile @click="">
+          <v-list-tile-action>
+            <v-icon>information</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+              <v-list-tile-title>About</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="">
+          <v-list-tile-action>
+            <v-icon>settings</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Settings</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar app fixed clipped-left color='red lighten-3'>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Application</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <v-container fluid grid-list-md>
+      <v-container fluid grid-list-md floating>
         <v-layout row wrap>
-          <v-flex xs12 md6 v-for="data in results" :key="data.Id">
-            <v-card
-            height="250px"
-            width="250px"
-            light
-            flat>
-              <v-card-media
-                :src=baseURL+data.ImageUrl
-                height="100px"
-              >
-              </v-card-media>
-              <v-card-title primary-title>
-                <div>
-                  <div class="headline">{{data.Name}}</div>
-                </div>
-              </v-card-title>
-            </v-card>
+          <v-flex sm-9 v-for="data in results" :key="data.Id">
+            <v-jumbotron style="border-radius:3px; border-style:solid; border-color: #ff4444;" dark>
+            <v-container fill-height>
+     <v-layout align-center>
+       <v-flex>
+         <img :src=baseURL+data.ImageUrl height="70px">
+           <h3 class="display-1 pa-3"><div class="headline">{{data.Name}}</div></h3>
+      </v-flex>
+    </v-layout>
+  </v-container>
+        </v-jumbotron>
           </v-flex>
         </v-layout>
       </v-container>
